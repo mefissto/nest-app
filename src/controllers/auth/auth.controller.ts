@@ -1,14 +1,15 @@
-import { Controller, Post, Get, Body } from '@nestjs/common';
+import { Controller, Post, Get, Body, Header } from '@nestjs/common';
 
 import { User } from './../../core/models/user.model';
 import { AuthService } from './auth.service';
 
-@Controller('auth')
+@Controller('api/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
   loginUser(@Body() user: User) {
+    console.log('user: ', user);
     return this.authService.login(user);
   }
 
@@ -17,8 +18,8 @@ export class AuthController {
     // return this.usersService.createUser(user);
   }
 
-  @Get(':id')
-  logoutUser() {
-    // return this.usersService.createUser(user);
-  }
+  // @Get(':id')
+  // logoutUser() {
+  //   // return this.usersService.createUser(user);
+  // }
 }
