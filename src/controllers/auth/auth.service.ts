@@ -15,10 +15,13 @@ export class AuthService {
 
   async login(userDTO: User) {
     const user = await this.userModel.findOne({ email: userDTO.email }).exec();
-    console.log('user: ', user);
     if (!user) {
       throw new NotFoundException(`User ${userDTO.email} not found`);
     }
     return;
+  }
+
+  async registration(userDTO: User) {
+    console.log('userDTO: ', userDTO);
   }
 }

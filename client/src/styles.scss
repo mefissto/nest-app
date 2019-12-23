@@ -1,0 +1,36 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Open Sans', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+form {
+  width: 100%;
+}
+
+.form-wrapper {
+  width: 100%;
+  padding: 10px 30px 20px;
+
+  background: #ece9e6;
+  background: -webkit-linear-gradient(to right, #ffffff, #ece9e6);
+  background: linear-gradient(to right, #ffffff, #ece9e6);
+}
+
+.form__error {
+  color: red;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 12px;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}

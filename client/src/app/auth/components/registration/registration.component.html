@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="form-wrapper mt-5 registration-form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="input-field">
+          <input id="username" type="text" formControlName="username" />
+          <label for="username">Name</label>
+          <div
+            class="form__error"
+            *ngIf="username?.touched && username?.errors"
+          >
+            <span *ngIf="username.errors.required">Username is required</span>
+          </div>
+        </div>
+        <div class="input-field">
+          <input id="mail" type="text" formControlName="email" />
+          <label for="mail">Email</label>
+          <div class="form__error" *ngIf="email?.touched && email?.errors">
+            <span *ngIf="email.errors.required">Email is required</span>
+            <span *ngIf="email.errors.email">Invalid email</span>
+          </div>
+        </div>
+        <div class="input-field">
+          <input id="pass" type="text" formControlName="password" />
+          <label for="pass">Password</label>
+          <div
+            class="form__error"
+            *ngIf="password?.touched && password?.errors"
+          >
+            <span *ngIf="password.errors.required">Password is required</span>
+            <span *ngIf="password.errors.minlength"
+              >Password should be
+              {{ password?.errors?.minlength?.requiredLength }} symbols at
+              least. Now {{ password?.errors?.minlength?.actualLength }}</span
+            >
+            <span *ngIf="password.errors.maxlength"
+              >Password should less than
+              {{ password?.errors?.maxlength?.requiredLength }} symbols. Now
+              {{ password?.errors?.maxlength?.actualLength }}</span
+            >
+          </div>
+        </div>
+        <div class="mb-4">
+          Already have account? <a [routerLink]="'../login'">Login</a>
+        </div>
+        <button class="button" type="submit" [disabled]="form?.invalid">
+          <a
+            class="waves-effect waves-light btn"
+            [class.disabled]="form?.invalid"
+            >Submit</a
+          >
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
