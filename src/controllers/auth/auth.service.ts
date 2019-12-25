@@ -1,27 +1,52 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { JwtService } from '@nestjs/jwt';
 
 import { User } from '../../core/models/user.model';
+import { ForbiddenException } from './../../core/exceptions/forbidden.exception';
+import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
-  constructor(@InjectModel('Users') private readonly userModel: Model<User>) {}
+  constructor(
+    private readonly userService: UsersService,
+    private readonly jwtService: JwtService,
+  ) {}
 
-  async createUser(createUserDto: User): Promise<User> {
-    const createdCat = new this.userModel(createUserDto);
-    return await createdCat.save();
+  async validateUser(email: string, pass: string): Promise<User> {
+    const user = await this.userService.findOne(email);
+    const isPassRight = await this.userService.compareHash(pass, user.password);
+
+    if (user && isPassRight) {
+      const { password, ...result } = user;
+      return result as User;
+    }
+
+    return null;
   }
 
-  async login(userDTO: User) {
-    const user = await this.userModel.findOne({ email: userDTO.email }).exec();
+  async login(userDTO: User): Promise<any> {
+    const user = await this.userService.findOne(userDTO.email);
+
     if (!user) {
       throw new NotFoundException(`User ${userDTO.email} not found`);
     }
-    return;
+
+    const payload = { username: user.email, sub: user._id };
+
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
   }
 
-  async registration(userDTO: User) {
-    console.log('userDTO: ', userDTO);
+  async registration(userDTO: User): Promise<void> {
+    const isUserExist = !!(await this.userService.findOne(userDTO.email));
+
+    if (isUserExist) {
+      throw new ForbiddenException();
+    }
+
+    await this.userService.createUser(userDTO);
+
+    return null;
   }
 }

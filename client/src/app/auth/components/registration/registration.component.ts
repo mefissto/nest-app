@@ -8,6 +8,8 @@ import {
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../../core/services/auth.service';
+import { HelperService } from '../../../core/services/helper.service';
+import { AuthUser } from '../../../core/models/auth.model';
 
 @Component({
   selector: 'app-registration',
@@ -51,8 +53,24 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
-  onSubmit() {
-    console.log(this.form);
+  onSubmit(): void {
     this.form.markAllAsTouched();
+
+    if (this.form.valid) {
+      const userModel = new AuthUser(this.form.value);
+      this.subs.add(
+        this.authService.registration(userModel).subscribe(
+          () => {
+            this.form.reset();
+            HelperService.resetMaterializeInputs();
+          },
+          err => {
+            if (err.status === 403) {
+              this.email.setErrors({ exist: true });
+            }
+          },
+        ),
+      );
+    }
   }
 }

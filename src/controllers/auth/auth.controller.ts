@@ -1,4 +1,6 @@
-import { Controller, Post, Get, Body, Header } from '@nestjs/common';
+import { LoginMiddleware } from './../../core/middleware/login.middleware';
+import { Controller, Post, Body, UseGuards, HttpCode } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 import { User } from './../../core/models/user.model';
 import { AuthService } from './auth.service';
@@ -7,19 +9,15 @@ import { AuthService } from './auth.service';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @UseGuards(AuthGuard('loginStrategy'))
+  @HttpCode(200)
   @Post('login')
-  loginUser(@Body() user: User) {
-    console.log('user: ', user);
-    return this.authService.login(user);
+  async login(@Body() user: User) {
+    return await this.authService.login(user);
   }
 
   @Post('registration')
-  registrationUser(@Body() user: User) {
-    // return this.usersService.createUser(user);
+  async registrationUser(@Body() user: User) {
+    return await this.authService.registration(user);
   }
-
-  // @Get(':id')
-  // logoutUser() {
-  //   // return this.usersService.createUser(user);
-  // }
 }

@@ -18,6 +18,7 @@
           <div class="form__error" *ngIf="email?.touched && email?.errors">
             <span *ngIf="email.errors.required">Email is required</span>
             <span *ngIf="email.errors.email">Invalid email</span>
+            <span *ngIf="email.errors.exist">Email already exist</span>
           </div>
         </div>
         <div class="input-field">

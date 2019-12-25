@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
 import { ConfigService } from './config.service';
 import { AuthUser } from '../models/auth.model';
 
@@ -9,17 +11,18 @@ export class AuthService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly config: ConfigService
+    private readonly config: ConfigService,
   ) {
     this.endpoint = `${this.config.host}/auth`;
   }
 
-  login(userDTO: AuthUser) {
-    console.log('userDTO: ', userDTO);
-    return this.http.post(`${this.endpoint}/login`, userDTO);
+  login(userDTO: AuthUser): Observable<AuthUser> {
+    return this.http.post<AuthUser>(`${this.endpoint}/login`, userDTO);
   }
 
-  registration(userDTO: AuthUser) {
-    return this.http.post(`${this.endpoint}/registration`, userDTO);
+  registration(userDTO: AuthUser): Observable<void> {
+    return this.http.post<void>(`${this.endpoint}/registration`, userDTO);
   }
+
+
 }
