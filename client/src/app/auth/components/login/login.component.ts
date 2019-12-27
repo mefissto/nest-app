@@ -5,8 +5,8 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
-import { Subject, of, Observable, Subscription, empty } from 'rxjs';
-import { exhaustMap, switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { AuthUser } from '../../../core/models/auth.model';
@@ -20,11 +20,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   private subs: Subscription = new Subscription();
 
   public form: FormGroup;
-  public formSubmit$: Subject<void> = new Subject();
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
+    private readonly router: Router,
   ) {}
 
   get email(): AbstractControl {
@@ -43,29 +43,24 @@ export class LoginComponent implements OnInit, OnDestroy {
         [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
       ],
     });
-
-    this.subs.add(
-      this.formSubmit$
-        .pipe(
-          exhaustMap(() => this.onSubmit()),
-          switchMap(user => user ? this.authService.login(user) : empty()),
-        )
-        .subscribe(),
-    );
   }
 
   ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
 
-  onSubmit(): Observable<AuthUser> {
-    console.log(this.form);
+  onSubmit(): void {
     this.form.markAllAsTouched();
 
-    // if () {}
-
-    const user = new AuthUser(this.form.value);
-    console.log('user: ', user);
-    return of(user);
+    if (this.form.valid) {
+      const user = new AuthUser(this.form.value);
+      console.log('user: ', user);
+      this.subs.add(
+        this.authService.login(user).subscribe(suc => {
+          console.log(suc);
+          this.router.navigate(['/']);
+        }),
+      );
+    }
   }
 }

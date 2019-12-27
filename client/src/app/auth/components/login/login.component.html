@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="form-wrapper mt-5 login-form">
-      <form [formGroup]="form" (ngSubmit)="formSubmit$.next()">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <div class="input-field">
           <input id="mail" type="text" formControlName="email" />
           <label for="mail">Email</label>

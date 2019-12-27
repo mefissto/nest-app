@@ -4,6 +4,6 @@ import { environment } from '../../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class ConfigService {
   get host(): string {
-    return environment.host;
+    return `${environment.host}/api`;
   }
 }
