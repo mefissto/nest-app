@@ -24,7 +24,7 @@ export class AuthService {
     return null;
   }
 
-  async login(userDTO: User): Promise<any> {
+  async login(userDTO: User): Promise<{ access_token: string }> {
     const user = await this.userService.findOne(userDTO.email);
 
     if (!user) {

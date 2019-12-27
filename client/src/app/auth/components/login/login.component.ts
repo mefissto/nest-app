@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../../core/services/auth.service';
-import { AuthUser } from '../../../core/models/auth.model';
+import { AuthUser } from '../../../core/models/auth/auth.model';
 
 @Component({
   selector: 'app-login',

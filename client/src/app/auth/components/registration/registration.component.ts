@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { HelperService } from '../../../core/services/helper.service';
-import { AuthUser } from '../../../core/models/auth.model';
+import { AuthUser } from '../../../core/models/auth/auth.model';
 
 @Component({
   selector: 'app-registration',
