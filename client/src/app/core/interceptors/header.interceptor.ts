@@ -6,7 +6,9 @@ import {
   HttpEvent,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { CookieService } from '../services/cookie/cookie.service';
+import { AppConstants } from './../../app.constants';
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
@@ -19,10 +21,10 @@ export class HeaderInterceptor implements HttpInterceptor {
     const cloneReq = req.clone({
       setHeaders: {
         'Access-Control-Allow-Origin': '*',
-        Authorization: `Bearer ${this.cookieService.getCookie('token')}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.cookieService.getCookie(AppConstants.TOKEN_NAME)}`,
       },
     });
-    console.log('cloneReq: ', cloneReq);
     return next.handle(cloneReq);
   }
 }

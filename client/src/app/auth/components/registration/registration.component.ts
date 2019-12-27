@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '../../../core/services/auth.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
 import { HelperService } from '../../../core/services/helper.service';
 import { AuthUser } from '../../../core/models/auth/auth.model';
 
