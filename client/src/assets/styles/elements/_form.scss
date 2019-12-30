@@ -1,0 +1,32 @@
+form {
+  width: 100%;
+}
+
+.form {
+  &-wrapper {
+    width: 100%;
+    padding: 10px 30px 20px;
+
+    background: #ece9e6;
+    background: -webkit-linear-gradient(to right, #ffffff, #ece9e6);
+    background: linear-gradient(to right, #ffffff, #ece9e6);
+
+    .title {
+      color: red;
+      margin: 0;
+      font-size: 26px;
+    }
+  }
+
+  &__error {
+    color: red;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 12px;
+  }
+}
+
+.auth-form {
+  min-width: 320px;
+  max-width: 540px;
+}
