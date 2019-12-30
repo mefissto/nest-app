@@ -5,6 +5,7 @@ import {
   Validators,
   AbstractControl,
 } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../../core/services/auth/auth.service';
@@ -24,6 +25,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
+    private readonly router: Router,
   ) {}
 
   get email(): AbstractControl {
@@ -63,6 +65,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
           () => {
             this.form.reset();
             HelperService.resetMaterializeInputs();
+            this.router.navigate(['auth/login']);
           },
           err => {
             if (err.status === 403) {

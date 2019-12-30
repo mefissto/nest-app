@@ -21,6 +21,12 @@ form {
   background: #ece9e6;
   background: -webkit-linear-gradient(to right, #ffffff, #ece9e6);
   background: linear-gradient(to right, #ffffff, #ece9e6);
+
+  .title {
+    color: red;
+    margin: 0;
+    font-size: 26px;
+  }
 }
 
 .form__error {

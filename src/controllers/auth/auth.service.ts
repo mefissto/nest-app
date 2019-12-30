@@ -14,9 +14,14 @@ export class AuthService {
 
   async validateUser(email: string, pass: string): Promise<User> {
     const user = await this.userService.findOne(email);
+
+    if (!user) {
+      throw new NotFoundException(`User ${email} not found`);
+    }
+
     const isPassRight = await this.userService.compareHash(pass, user.password);
 
-    if (user && isPassRight) {
+    if (isPassRight) {
       const { password, ...result } = user;
       return result as User;
     }
