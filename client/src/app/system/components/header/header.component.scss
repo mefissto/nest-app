@@ -1,0 +1,23 @@
+.navbar-header {
+  width: 100%;
+  display: flex;
+  max-height: 60px;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: flex-start;
+    width: auto;
+  }
+
+  h1 {
+    color: #fff;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,15 @@
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+
+  &--logo {
+    margin-right: -12px;
+    width: 30px;
+    height: 30px;
+    stroke-width: 1px;
+  }
+}
