@@ -19,7 +19,10 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return await this.userModel.find().exec();
+    return await this.userModel
+      .find()
+      .select('-password')
+      .exec();
   }
 
   async findOne(value: any, propName: string = 'email'): Promise<User> {
