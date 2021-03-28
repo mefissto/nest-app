@@ -24,6 +24,8 @@ export class AuthService {
     if (isPassRight) {
       const { password, ...result } = user;
       return result as User;
+    } else {
+      throw new ForbiddenException('Invalid password!');
     }
 
     return null;
@@ -47,7 +49,7 @@ export class AuthService {
     const isUserExist = !!(await this.userService.findOne(userDTO.email));
 
     if (isUserExist) {
-      throw new ForbiddenException();
+      throw new ForbiddenException('User already exists!');
     }
 
     await this.userService.createUser(userDTO);
