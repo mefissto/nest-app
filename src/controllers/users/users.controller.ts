@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   UseGuards,
+  Delete,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
@@ -30,5 +31,10 @@ export class UsersController {
   @Patch(':id')
   updateUser(@Param('id') id: string, @Body() user: User) {
     return this.usersService.updateUser(user, id);
+  }
+
+  @Delete(':id')
+  deleteUser(@Param('id') id: string) {
+    return this.usersService.deleteUser(id);
   }
 }

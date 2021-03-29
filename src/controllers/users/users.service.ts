@@ -14,8 +14,8 @@ export class UsersService {
       ...createUserDto,
       password: await this.getHash(createUserDto.password),
     };
-    const createdCat = new this.userModel(newUser);
-    return await createdCat.save();
+    const createdUser = new this.userModel(newUser);
+    return await createdUser.save();
   }
 
   async findAll(): Promise<User[]> {
@@ -25,9 +25,12 @@ export class UsersService {
       .exec();
   }
 
-  async findOne(value: any, propName: string = 'email'): Promise<User> {
-    const user = await this.userModel.findOne({ [propName]: value }).exec();
-    return user;
+  async findOne(value: any, avoidPassword?: boolean, propName: string = 'email'): Promise<User> {
+    return await this.userModel.findOne({ [propName]: value }, `${avoidPassword ? '-password' : ''}`).exec();
+  }
+
+  async deleteUser(id: string): Promise<User> {
+    return await this.userModel.findByIdAndDelete(id).exec();
   }
 
   async updateUser(user: User, id: string): Promise<User[]> {

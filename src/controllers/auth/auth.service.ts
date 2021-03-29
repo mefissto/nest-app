@@ -12,7 +12,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateUser(email: string, pass: string): Promise<User> {
+  public async validateUser(email: string, pass: string): Promise<User> {
     const user = await this.userService.findOne(email);
 
     if (!user) {
@@ -27,12 +27,10 @@ export class AuthService {
     } else {
       throw new ForbiddenException('Invalid password!');
     }
-
-    return null;
   }
 
-  async login(userDTO: User): Promise<{ access_token: string }> {
-    const user = await this.userService.findOne(userDTO.email);
+  public async login(userDTO: User): Promise<{ access_token: string; user: Partial<User> }> {
+    const user = await this.userService.findOne(userDTO.email, true);
 
     if (!user) {
       throw new NotFoundException(`User ${userDTO.email} not found`);
@@ -42,13 +40,14 @@ export class AuthService {
 
     return {
       access_token: this.jwtService.sign(payload),
+      user,
     };
   }
 
-  async registration(userDTO: User): Promise<void> {
-    const isUserExist = !!(await this.userService.findOne(userDTO.email));
+  public async registration(userDTO: User): Promise<void> {
+    const userExists = !!(await this.userService.findOne(userDTO.email));
 
-    if (isUserExist) {
+    if (userExists) {
       throw new ForbiddenException('User already exists!');
     }
 
