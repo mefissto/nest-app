@@ -29,7 +29,7 @@ export class AuthService {
     }
   }
 
-  public async login(userDTO: User): Promise<{ access_token: string; user: Partial<User> }> {
+  public async login(userDTO: User): Promise<{ access_token: string }> {
     const user = await this.userService.findOne(userDTO.email, true);
 
     if (!user) {
@@ -38,10 +38,7 @@ export class AuthService {
 
     const payload = { username: user.email, sub: user._id };
 
-    return {
-      access_token: this.jwtService.sign(payload),
-      user,
-    };
+    return { access_token: this.jwtService.sign(payload) };
   }
 
   public async registration(userDTO: User): Promise<void> {
@@ -54,5 +51,11 @@ export class AuthService {
     await this.userService.createUser(userDTO);
 
     return null;
+  }
+
+  public async getUserInfoByToken(jwt: string): Promise<User> {
+    const token = jwt.replace('Bearer ', '');
+    const { sub } = this.jwtService.decode(token, { json: true });
+    return await this.userService.findById(sub);
   }
 }

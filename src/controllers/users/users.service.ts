@@ -18,6 +18,10 @@ export class UsersService {
     return await createdUser.save();
   }
 
+  async findById(id: string): Promise<User> {
+    return await this.userModel.findById(id).select('-password').exec();
+  }
+
   async findAll(): Promise<User[]> {
     return await this.userModel
       .find()
