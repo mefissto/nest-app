@@ -1,10 +1,12 @@
-import { Controller, Post, Body, UseGuards, HttpCode, Get, Headers } from '@nestjs/common';
+import { Body, Controller, Get, Headers, HttpCode, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { ApiTags } from '@nestjs/swagger';
 
-import { User } from './../../core/models/user.model';
+import { User } from '@models/user.model';
 import { AuthService } from './auth.service';
 
 @Controller('api/auth')
+@ApiTags('Auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
@@ -23,6 +25,7 @@ export class AuthController {
 
   @Post('registration')
   async registrationUser(@Body() user: User) {
+    console.log("-> user", user);
     return await this.authService.registration(user);
   }
 }

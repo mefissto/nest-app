@@ -1,15 +1,15 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { User } from '../../core/models/user.model';
-import { ForbiddenException } from './../../core/exceptions/forbidden.exception';
+import { User } from '@models/user.model';
+import { ForbiddenException } from '@exceptions/forbidden.exception';
 import { UsersService } from '../users/users.service';
 
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userService: UsersService,
-    private readonly jwtService: JwtService,
+      private readonly userService: UsersService,
+      private readonly jwtService: JwtService,
   ) {}
 
   public async validateUser(email: string, pass: string): Promise<User> {
@@ -39,6 +39,7 @@ export class AuthService {
     const payload = { username: user.email, sub: user._id };
 
     return { access_token: this.jwtService.sign(payload) };
+
   }
 
   public async registration(userDTO: User): Promise<void> {

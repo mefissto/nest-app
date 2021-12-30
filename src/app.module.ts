@@ -1,17 +1,16 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AppConfig } from './utils/app.config';
 
 import { UsersModule } from './controllers/users/users.module';
 import { AuthModule } from './controllers/auth/auth.module';
 import { NewsModule } from './controllers/news/news.module';
+import { DatabaseModule } from "@database/database.module";
 
 @Module({
   imports: [
-    MongooseModule.forRoot(AppConfig.connectionString),
+    DatabaseModule,
     UsersModule,
     AuthModule,
     NewsModule,
@@ -19,4 +18,5 @@ import { NewsModule } from './controllers/news/news.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+}

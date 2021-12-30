@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
+
 
 import { NewsService } from './news.service';
 import { NewsController } from './news.controller';
-import { NewsSchema } from './../../core/schemas/news.schema';
+import { DatabaseModule } from "@database/database.module";
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: 'News', schema: NewsSchema }])],
+  imports: [DatabaseModule],
   controllers: [NewsController],
   providers: [NewsService],
   exports: [NewsService],

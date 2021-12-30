@@ -1,12 +1,13 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Inject, Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 
 import { News } from 'src/core/models/news.model';
+import { DBModelsEnum } from "@database/db-models.enum";
 
 @Injectable()
 export class NewsService {
-  constructor(@InjectModel('News') private readonly newsModel: Model<News>) {}
+  constructor(@Inject(DBModelsEnum.NEWS_MODEL) private readonly newsModel: Model<News>) {
+  }
 
   public async createNews(createNewsDto: News): Promise<News> {
     const createdNews = new this.newsModel(createNewsDto);

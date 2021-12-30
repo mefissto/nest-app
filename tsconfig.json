@@ -5,11 +5,25 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true
-  },
-  "exclude": ["node_modules", "dist"]
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@exceptions/*": ["src/core/exceptions/*"],
+      "@middleware/*": ["src/core/middleware/*"],
+      "@models/*": ["src/core/models/*"],
+      "@schemas/*": ["src/core/schemas/*"],
+      "@database/*": ["src/core/database/*"],
+      "@configs/*": ["src/configs/*"],
+    }
+  }
 }
