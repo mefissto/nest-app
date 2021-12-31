@@ -7,7 +7,7 @@ export const UserSchema = new mongoose.Schema(
       email: { type: String, required: true },
       password: { type: String, required: true },
       dateCreation: { type: Date, default: Date.now },
-      role: { type: Number, default: UserRolesEnum.User },
+      role: { type: String, default: UserRolesEnum.User },
     },
     { versionKey: false },
 );

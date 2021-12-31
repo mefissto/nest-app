@@ -10,7 +10,8 @@ export class AuthService {
   constructor(
       private readonly userService: UsersService,
       private readonly jwtService: JwtService,
-  ) {}
+  ) {
+  }
 
   public async validateUser(email: string, pass: string): Promise<User> {
     const user = await this.userService.findOne(email);
@@ -30,7 +31,7 @@ export class AuthService {
   }
 
   public async login(userDTO: User): Promise<{ access_token: string }> {
-    const user = await this.userService.findOne(userDTO.email, true);
+    const user: User = await this.userService.findOne(userDTO.email, true);
 
     if (!user) {
       throw new NotFoundException(`User ${userDTO.email} not found`);

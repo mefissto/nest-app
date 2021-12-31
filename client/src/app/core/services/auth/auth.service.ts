@@ -59,7 +59,7 @@ export class AuthService {
       return true;
     }
 
-    const date = this.getTokenExpirationDate(token);
+    const date = AuthService.getTokenExpirationDate(token);
     if (date === undefined) {
       return false;
     }

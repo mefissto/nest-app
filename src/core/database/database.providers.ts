@@ -1,13 +1,12 @@
 import * as mongoose from 'mongoose';
 import { Connection } from 'mongoose';
-import { AppConfig } from "@configs/app.config";
 import { DBModelsEnum } from "@database/db-models.enum";
 import { UserSchema } from '@schemas/user.schema';
 import { NewsSchema } from "@schemas/news.schema";
 
 const databaseConnection = {
   provide: DBModelsEnum.DATABASE_CONNECTION,
-  useFactory: (): Promise<typeof mongoose> => mongoose.connect(AppConfig.connectionString),
+  useFactory: (): Promise<typeof mongoose> => mongoose.connect(process.env.DB_CONNECTION_STRING),
 }
 
 export const usersProvider =
