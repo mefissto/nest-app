@@ -1,27 +1,13 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthService } from '../services/auth/auth.service';
 
 @Injectable()
 export class LoginGuard implements CanActivate {
-  constructor(
-    private readonly authService: AuthService,
-    private readonly router: Router,
-  ) {}
+  constructor(private readonly authService: AuthService, private readonly router: Router) {}
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot,
-  ): boolean {
-    if (
-      this.authService.isAuthenticated &&
-      !this.authService.isTokenExpired()
-    ) {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.authService.isAuthenticated && !this.authService.isTokenExpired()) {
       this.router.navigate(['/']);
       return false;
     }
