@@ -2,13 +2,12 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Document, Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
-import { User } from 'src/core/models/user.model';
-import { DBModelsEnum } from "@database/db-models.enum";
+import { User } from '@models/user.model';
+import { DBModelsEnum } from '@database/db-models.enum';
 
 @Injectable()
 export class UsersService {
-  constructor(@Inject(DBModelsEnum.USER_MODEL) private readonly userModel: Model<User>) {
-  }
+  constructor(@Inject(DBModelsEnum.USER_MODEL) private readonly userModel: Model<User>) {}
 
   async createUser(createUserDto: User): Promise<User> {
     const newUser = {
@@ -24,10 +23,7 @@ export class UsersService {
   }
 
   async findAll(): Promise<User[]> {
-    return await this.userModel
-        .find()
-        .select('-password')
-        .exec();
+    return await this.userModel.find().select('-password').exec();
   }
 
   async findOne(value: any, avoidPassword?: boolean, propName: string = 'email'): Promise<User> {
@@ -39,19 +35,14 @@ export class UsersService {
   }
 
   async updateUser(user: User, id: string): Promise<Document<any, any, User> & User & { _id: number }> {
-    return await this.userModel
-        .findOneAndUpdate({ _id: id }, user, { new: true })
-        .exec();
+    return await this.userModel.findOneAndUpdate({ _id: id }, user, { new: true }).exec();
   }
 
   async getHash(password: string | undefined): Promise<string> {
     return bcrypt.hash(password, 10);
   }
 
-  async compareHash(
-      password: string | undefined,
-      hash: string | undefined,
-  ): Promise<boolean> {
+  async compareHash(password: string | undefined, hash: string | undefined): Promise<boolean> {
     return bcrypt.compare(password, hash);
   }
 }

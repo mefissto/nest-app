@@ -1,6 +1,6 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty } from '@nestjs/swagger';
 
-import { UserRolesEnum } from "../enums/user-roles.enum";
+import { UserRolesEnum } from '../enums/user-roles.enum';
 
 export class User {
   @ApiProperty({ example: 'test@gmail.com', description: 'Email address' })

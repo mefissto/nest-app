@@ -5,13 +5,10 @@
     margin-top: 8px;
     margin-bottom: 8px;
     background-color: transparent;
-    border: 1px solid transparent;
+    border: 1px solid #333;
     border-radius: 4px;
 
-    background-color: transparent;
     color: #fff;
-
-    border-color: #333;
 
     &:hover,
     &:focus,
@@ -58,7 +55,6 @@
         height: 2px;
         background: #fff;
         opacity: 0;
-        transition: opacity 0.3s transform 0.3s;
         transform: translateY(-10px);
         transition: all 0.5s ease-in-out;
       }
