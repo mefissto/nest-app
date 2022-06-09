@@ -18,7 +18,7 @@ export class AuthService {
   constructor(
     private readonly http: HttpClient,
     private readonly config: ConfigService,
-    private readonly cookieService: CookieService,
+    private readonly cookieService: CookieService
   ) {
     this.endpoint = `${this.config.host}/auth`;
   }
@@ -39,21 +39,19 @@ export class AuthService {
     return date;
   }
 
-  login(userDTO: AuthUser): Observable<Token> {
-    return this.http
-      .post<Token>(`${this.endpoint}/login`, userDTO)
-      .pipe(map(token => this.saveToken(token)));
+  public login(userDTO: AuthUser): Observable<Token> {
+    return this.http.post<Token>(`${this.endpoint}/login`, userDTO).pipe(map((token) => this.saveToken(token)));
   }
 
-  registration(userDTO: AuthUser): Observable<void> {
+  public registration(userDTO: AuthUser): Observable<void> {
     return this.http.post<void>(`${this.endpoint}/registration`, userDTO);
   }
 
-  logout(): void {
+  public logout(): void {
     this.cookieService.setCookie(AppConstants.TOKEN_NAME, '');
   }
 
-  isTokenExpired(): boolean {
+  public isTokenExpired(): boolean {
     const token: string = this.getToken().access_token;
     if (!token) {
       return true;

@@ -7,7 +7,7 @@ import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('News')
 @UseGuards(JwtAuthGuard)
-@Controller('api/news')
+@Controller('news')
 export class NewsController {
   constructor(private readonly newsService: NewsService) {}
 

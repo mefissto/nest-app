@@ -1,11 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators, AbstractControl } from '@angular/forms';
+import {
+  UntypedFormGroup,
+  UntypedFormBuilder,
+  Validators,
+  AbstractControl,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '@services/auth/auth.service';
-import { HelperService } from '@services/helper.service';
-import { AuthUser } from '@models/auth/auth.model';
+import { AuthService } from '@core/services/auth/auth.service';
+import { HelperService } from '@core/services/helper.service';
+import { AuthUser } from '@core/models/auth/auth.model';
 
 @Component({
   selector: 'app-registration',
@@ -20,7 +25,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   constructor(
     private readonly fb: UntypedFormBuilder,
     private readonly authService: AuthService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   get email(): AbstractControl {
@@ -39,7 +44,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       username: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      password: [
+        null,
+        [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
+      ],
     });
   }
 
@@ -59,12 +67,12 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             HelperService.resetMaterializeInputs();
             this.router.navigate(['auth/login']);
           },
-          (err) => {
+          err => {
             if (err.status === 403) {
               this.email.setErrors({ exist: true });
             }
-          }
-        )
+          },
+        ),
       );
     }
   }
