@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UntypedFormGroup, UntypedFormBuilder, Validators, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -13,10 +13,10 @@ import { AuthUser } from '@core/models/auth/auth.model';
 export class RegistrationComponent implements OnInit, OnDestroy {
   private subs: Subscription = new Subscription();
 
-  public form: UntypedFormGroup;
+  public form: FormGroup;
 
   constructor(
-    private readonly fb: UntypedFormBuilder,
+    private readonly fb: FormBuilder,
     private readonly authService: AuthService,
     private readonly router: Router
   ) {}
