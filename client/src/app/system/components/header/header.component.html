@@ -1,11 +1,8 @@
 <header class="navbar navbar-inverse navbar-fixed-top opaqued">
-  <!-- <app-search></app-search> -->
-
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle">
-        <i class="fa fa-bars"></i>
-      </button>
+      <mat-icon class="navbar-toggle" (click)="toggleMenu.emit()">menu</mat-icon>
+
       <a class="navbar-brand" [routerLink]="'/'">
         <h1>
           <svg class="icon icon--logo">

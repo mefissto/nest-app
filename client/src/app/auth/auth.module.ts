@@ -1,24 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
-import { AuthComponent } from './auth.component';
-import { AuthRoutingModule } from './auth-routing.module';
-import { CoreModule } from '../core/core.module';
+import { SharedModule } from '@shared/shared.module';
+import { AuthRoutingModule } from '@auth/auth-routing.module';
 
-import { LoginComponent } from './components/login/login.component';
-import { RegistrationComponent } from './components/registration/registration.component';
+import { AuthComponent } from '@auth/auth.component';
+import { LoginComponent } from '@auth/components/login/login.component';
+import { RegistrationComponent } from '@auth/components/registration/registration.component';
+import { AuthSubmitButtonComponent } from '@auth/components/auth-submit-button/auth-submit-button.component';
+import { AuthSocialIconsComponent } from '@auth/components/auth-social-icons/auth-social-icons.component';
 
 @NgModule({
-  declarations: [AuthComponent, LoginComponent, RegistrationComponent],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    MatFormFieldModule,
-    CoreModule,
-    ReactiveFormsModule,
-    FormsModule,
-  ]
+  declarations: [
+    AuthComponent,
+    LoginComponent,
+    RegistrationComponent,
+    AuthSubmitButtonComponent,
+    AuthSocialIconsComponent,
+  ],
+  imports: [CommonModule, AuthRoutingModule, SharedModule],
 })
 export class AuthModule {}

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { CookieService } from '../services/cookie/cookie.service';
-import { AppConstants } from '../../app.constants';
+import { CookieService } from '@core/services';
+import { TOKEN_NAME } from '@constants';
 
 @Injectable()
 export class HeaderInterceptor implements HttpInterceptor {
@@ -14,7 +14,7 @@ export class HeaderInterceptor implements HttpInterceptor {
       setHeaders: {
         'Access-Control-Allow-Origin': '*',
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${this.cookieService.getCookie(AppConstants.TOKEN_NAME)}`,
+        Authorization: `Bearer ${this.cookieService.getCookie(TOKEN_NAME)}`,
       },
     });
     return next.handle(cloneReq);

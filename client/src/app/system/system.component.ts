@@ -7,9 +7,9 @@ import { UserService } from '../core/services/users/user.service';
   styleUrls: ['./system.component.scss'],
 })
 export class SystemComponent implements OnInit {
-  constructor(private readonly userDervice: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
-  ngOnInit() {
-    this.userDervice.fetchUsers().subscribe(res => console.log(res));
+  public ngOnInit(): void {
+    this.userService.fetchUsers().subscribe((res) => console.log(res));
   }
 }

@@ -1,35 +1,13 @@
 .auth {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  padding-top: 65px;
-
-  background: #2c3e50; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #3498db,
-    #2c3e50
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #3498db,
-    #2c3e50
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
-.logo {
-  margin-bottom: 10px;
+  background-image: url('~assets/img/bg-01.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
   display: flex;
-  height: 90px;
+  flex-wrap: wrap;
   justify-content: center;
-
-  svg {
-    max-height: 100%;
-  }
-}
-
-.title {
-  text-align: center;
-  font-size: 50px;
-  font-family: Satisfy, 'Open-Sans';
-  color: #fff;
+  align-items: center;
+  padding: 15px;
 }

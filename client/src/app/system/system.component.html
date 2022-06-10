@@ -1,4 +1,12 @@
-<app-header></app-header>
-<app-nav></app-nav>
+<app-header class="mat-elevation-z6" (toggleMenu)="drawer.toggle()"></app-header>
+<mat-drawer-container autosize>
+  <mat-drawer opened #drawer mode="side"> </mat-drawer>
+  <mat-drawer-content>
+    <div class="d-flex justify-content-center">
+      Main content
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+<!-- <app-nav></app-nav>
 <app-main-content></app-main-content>
-<app-footer></app-footer>
+<app-footer></app-footer> -->

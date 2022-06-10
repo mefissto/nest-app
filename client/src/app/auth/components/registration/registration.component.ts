@@ -1,21 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {
-  UntypedFormGroup,
-  UntypedFormBuilder,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '@core/services/auth/auth.service';
-import { HelperService } from '@core/services/helper.service';
+import { AuthService } from '@core/services';
 import { AuthUser } from '@core/models/auth/auth.model';
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
   private subs: Subscription = new Subscription();
@@ -25,37 +18,34 @@ export class RegistrationComponent implements OnInit, OnDestroy {
   constructor(
     private readonly fb: UntypedFormBuilder,
     private readonly authService: AuthService,
-    private readonly router: Router,
+    private readonly router: Router
   ) {}
 
-  get email(): AbstractControl {
-    return this.form.get('email');
+  get email(): FormControl {
+    return this.form.get('email') as FormControl;
   }
 
-  get password(): AbstractControl {
-    return this.form.get('password');
+  get password(): FormControl {
+    return this.form.get('password') as FormControl;
   }
 
-  get username(): AbstractControl {
-    return this.form.get('username');
+  get username(): FormControl {
+    return this.form.get('username') as FormControl;
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.form = this.fb.group({
       username: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
-      password: [
-        null,
-        [Validators.required, Validators.minLength(4), Validators.maxLength(8)],
-      ],
+      password: [null, [Validators.required, Validators.minLength(4)]],
     });
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this.subs.unsubscribe();
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
@@ -64,15 +54,15 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         this.authService.registration(userModel).subscribe(
           () => {
             this.form.reset();
-            HelperService.resetMaterializeInputs();
+
             this.router.navigate(['auth/login']);
           },
-          err => {
+          (err) => {
             if (err.status === 403) {
               this.email.setErrors({ exist: true });
             }
-          },
-        ),
+          }
+        )
       );
     }
   }

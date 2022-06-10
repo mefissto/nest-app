@@ -22,16 +22,26 @@
       "@core/*": [
         "app/core/*"
       ],
+      "@auth/*": [
+        "app/auth/*"
+      ],
+      "@shared/*": [
+        "app/shared/*"
+      ],
       "@services/*": [
         "app/core/services/*"
       ],
       "@models/*": [
         "app/core/models/*"
-      ]
+      ],
+      "@constants": [
+        "app/app.constants.ts"
+      ],
     }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "strictInjectionParameters": true,
+    "strictTemplates": true
   }
 }

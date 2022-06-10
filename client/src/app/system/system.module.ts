@@ -8,6 +8,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { SearchComponent } from './components/search/search.component';
 import { NavComponent } from './components/nav/nav.component';
+import { MaterialModule } from '@shared/material.module';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,6 @@ import { NavComponent } from './components/nav/nav.component';
     SearchComponent,
     NavComponent,
   ],
-  imports: [CommonModule, SystemRoutingModule],
+  imports: [CommonModule, SystemRoutingModule, MaterialModule, SharedModule],
 })
 export class SystemModule {}

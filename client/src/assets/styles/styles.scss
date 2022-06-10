@@ -1,5 +1,10 @@
-@import './elements/form';
-@import './elements/button';
+@import 'reset';
+@import './elements/auth-button';
+@import './elements/auth-form';
+
 @import './elements/sections';
-@import './elements/icons';
 @import './elements/navbar';
+
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import 'material-icons-theme';

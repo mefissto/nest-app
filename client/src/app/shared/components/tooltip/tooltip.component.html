@@ -1,0 +1,15 @@
+<div class="tooltip-wrapper">
+  <div class="tooltip-content"><ng-container [ngTemplateOutlet]="contentTemplate || defaultTpl"> </ng-container></div>
+</div>
+
+<ng-template #defaultTpl>
+  <ng-container *ngIf="messages.length > 1">
+    <div *ngFor="let message of messages" class="d-flex flex-column">
+      <span>{{ message }}</span>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="messages.length <= 1">
+    {{ messages[0] || text }}
+  </ng-container>
+</ng-template>

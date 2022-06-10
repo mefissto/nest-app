@@ -1,0 +1,25 @@
+form {
+  width: 100%;
+}
+
+.auth-form {
+  width: 500px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 55px;
+
+  .title {
+    display: block;
+    font-weight: bold;
+    font-size: 39px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+    padding-bottom: 50px;
+  }
+
+  .auth-link {
+    font-size: 14px;
+  }
+}
