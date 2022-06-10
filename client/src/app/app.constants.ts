@@ -1,3 +1,5 @@
+import { GlobalConfig } from 'ngx-toastr';
+
 export const TOKEN_NAME = 'jwt_token';
 
 export const SOCIAL_ICONS: string[] = ['google', 'facebook', 'github', 'linkedin'];
@@ -10,3 +12,9 @@ export const CUSTOM_ICONS: { name: string; path: string }[] = [
   { name: 'twitter', path: `${CUSTOM_ICON_PATH}/twitter-brands.svg` },
   { name: 'exclamation', path: `${CUSTOM_ICON_PATH}/exclamation-solid.svg` },
 ];
+export const SNACKBAR_CONFIG: Partial<GlobalConfig> = {
+  closeButton: true,
+  easeTime: 400,
+  maxOpened: 5,
+  timeOut: 7000,
+};

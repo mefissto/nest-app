@@ -3,8 +3,8 @@ import { UntypedFormGroup, UntypedFormBuilder, Validators, FormControl } from '@
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { AuthService } from '@core/services/auth/auth.service';
 import { AuthUser } from '@core/models/auth/auth.model';
+import { AuthService } from '@core/services';
 
 @Component({
   selector: 'app-login',
