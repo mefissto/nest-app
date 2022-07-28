@@ -5,10 +5,13 @@ import { SharedModule } from '@shared/shared.module';
 import { AuthRoutingModule } from '@auth/auth-routing.module';
 
 import { AuthComponent } from '@auth/auth.component';
-import { LoginComponent } from '@auth/components/login/login.component';
-import { RegistrationComponent } from '@auth/components/registration/registration.component';
-import { AuthSubmitButtonComponent } from '@auth/components/auth-submit-button/auth-submit-button.component';
-import { AuthSocialIconsComponent } from '@auth/components/auth-social-icons/auth-social-icons.component';
+import {
+  AuthSocialIconsComponent,
+  AuthSubmitButtonComponent,
+  LoginComponent,
+  RegistrationComponent,
+  ResetPasswordComponent,
+} from '@auth/components';
 
 @NgModule({
   declarations: [
@@ -17,6 +20,7 @@ import { AuthSocialIconsComponent } from '@auth/components/auth-social-icons/aut
     RegistrationComponent,
     AuthSubmitButtonComponent,
     AuthSocialIconsComponent,
+    ResetPasswordComponent,
   ],
   imports: [CommonModule, AuthRoutingModule, SharedModule],
 })

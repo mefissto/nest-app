@@ -1,1 +1,1 @@
-export type FormErrorType = boolean | { actualLength: number; requiredLength: number };
+export type FormErrorType = boolean | { actualLength?: number; requiredLength?: number; message?: string };

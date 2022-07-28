@@ -45,6 +45,10 @@ export class AuthService {
     return this.http.post<void>(`${this.endpoint}/registration`, userDTO);
   }
 
+  public resetPassword(email: string): Observable<void> {
+    return this.http.post<void>(`${this.endpoint}/reset-password`, { email });
+  }
+
   public logout(): void {
     this.cookieService.setCookie(TOKEN_NAME, '');
   }

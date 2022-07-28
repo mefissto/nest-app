@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   public form: FormGroup;
 
   private subs: Subscription = new Subscription();
+
   constructor(
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
@@ -44,11 +45,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     if (this.form.valid) {
       const user = new AuthUser(this.form.value);
-      this.subs.add(
-        this.authService.login(user).subscribe(() => {
-          this.router.navigate(['/']);
-        })
-      );
+      this.subs.add(this.authService.login(user).subscribe(() => this.router.navigate(['/'])));
     }
   }
 }

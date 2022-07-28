@@ -5,6 +5,8 @@ export function matchErrorMessages(source: Record<string, FormErrorType>): Recor
   return Object.entries(source).reduce((acc, [key, value]) => {
     if (typeof value === 'boolean') {
       acc[key] = FormErrorMessagesEnum[key];
+    } else if (!FormErrorMessagesEnum[key]) {
+      acc[key] = value.message;
     } else {
       acc[key] = FormErrorMessagesEnum[key] + value.requiredLength;
     }

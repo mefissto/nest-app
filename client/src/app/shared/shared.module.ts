@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
 import { MaterialModule } from '@shared/material.module';
 
@@ -12,7 +11,7 @@ import { TooltipComponent } from '@shared/components/tooltip/tooltip.component';
 
 const COMPONENTS = [InputComponent];
 const DIRECTIVES = [TooltipRendererDirective];
-const MODULES = [MaterialModule, FormsModule, ReactiveFormsModule, RouterModule];
+const MODULES = [FormsModule, ReactiveFormsModule, MaterialModule];
 
 @NgModule({
   imports: [CommonModule, ...MODULES],

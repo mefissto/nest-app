@@ -5,10 +5,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
+import { CoreModule } from '@core/core.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderInterceptor } from '@core/interceptors/header.interceptor';
-import { CoreModule } from '@core/core.module';
+import { ErrorInterceptor } from '@core/interceptors/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,6 +26,11 @@ import { CoreModule } from '@core/core.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
   ],

@@ -4,13 +4,12 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '@core/services';
-import { AuthUser } from '@core/models/auth/auth.model';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
 })
-export class RegistrationComponent implements OnInit, OnDestroy {
+export class ResetPasswordComponent implements OnInit, OnDestroy {
   public form: FormGroup;
 
   private subs: Subscription = new Subscription();
@@ -35,9 +34,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.form = this.fb.group({
-      username: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(4)]],
     });
   }
 
@@ -49,19 +46,10 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      const userModel = new AuthUser(this.form.value);
       this.subs.add(
-        this.authService.registration(userModel).subscribe(
-          () => {
-            this.form.reset();
-            this.router.navigate(['auth/login']);
-          },
-          (err) => {
-            if (err.status === 403) {
-              this.email.setErrors({ exist: { message: err.error.message } });
-            }
-          }
-        )
+        this.authService.resetPassword(this.form.value.email).subscribe(() => {
+          // !TODO --> add logic
+        })
       );
     }
   }
