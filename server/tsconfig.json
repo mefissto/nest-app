@@ -18,12 +18,27 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@exceptions/*": ["src/core/exceptions/*"],
-      "@middleware/*": ["src/core/middleware/*"],
-      "@models/*": ["src/core/models/*"],
-      "@schemas/*": ["src/core/schemas/*"],
-      "@database/*": ["src/core/database/*"],
-      "@configs/*": ["src/configs/*"],
+      "@exceptions/*": [
+        "src/core/exceptions/*"
+      ],
+      "@middleware/*": [
+        "src/core/middleware/*"
+      ],
+      "@models/*": [
+        "src/core/models/*"
+      ],
+      "@schemas/*": [
+        "src/core/schemas/*"
+      ],
+      "@database/*": [
+        "src/core/database/*"
+      ],
+      "@configs/*": [
+        "src/configs/*"
+      ],
+      "@controllers/*": [
+        "src/controllers/*"
+      ],
     }
   }
 }

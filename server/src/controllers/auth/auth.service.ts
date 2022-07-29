@@ -3,11 +3,17 @@ import { JwtService } from '@nestjs/jwt';
 
 import { User } from '@models/user.model';
 import { ForbiddenException } from '@exceptions/forbidden.exception';
-import { UsersService } from '../users/users.service';
+import { UsersService } from '@controllers/users/users.service';
+import { EmailService } from '@controllers/email/email.service';
+import { EmailData } from '@models/email-data.model';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userService: UsersService, private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly userService: UsersService,
+    private readonly jwtService: JwtService,
+    private readonly emailService: EmailService
+  ) {}
 
   public async validateUser(email: string, pass: string): Promise<User> {
     const user = await this.userService.findOne(email);
@@ -54,5 +60,21 @@ export class AuthService {
     const token = jwt.replace('Bearer ', '');
     const { sub } = this.jwtService.decode(token, { json: true });
     return await this.userService.findById(sub);
+  }
+
+  public async resetPassword(email: string): Promise<any> {
+    const user: User = await this.userService.findOne(email);
+
+    if (!user) {
+      throw new NotFoundException(`User ${user.email} not found`);
+    }
+
+    const emailData = new EmailData({
+      email,
+      subject: 'Reset password confirmation',
+      context: { name: user.username },
+    });
+
+    return this.emailService.sendEmail(emailData);
   }
 }

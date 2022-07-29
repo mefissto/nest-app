@@ -3,8 +3,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { User } from '@models/user.model';
-import { AuthService } from './auth.service';
 import { LoginResponse } from '@models/login-response.model';
+import { AuthService } from './auth.service';
 
 @Controller('auth')
 @ApiTags('Auth')
@@ -33,5 +33,12 @@ export class AuthController {
   @ApiResponse({ status: HttpStatus.CREATED })
   async registrationUser(@Body() user: User) {
     return await this.authService.registration(user);
+  }
+
+  @Post('reset-password')
+  @ApiOperation({ summary: 'Reset user password' })
+  @ApiResponse({ status: HttpStatus.OK })
+  async resetPassword(@Body('email') email: string) {
+    return this.authService.resetPassword(email);
   }
 }

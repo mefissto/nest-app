@@ -1,9 +1,8 @@
 import { Module } from '@nestjs/common';
 
-
-import { NewsService } from './news.service';
+import { DatabaseModule } from '@database/database.module';
 import { NewsController } from './news.controller';
-import { DatabaseModule } from "@database/database.module";
+import { NewsService } from './news.service';
 
 @Module({
   imports: [DatabaseModule],

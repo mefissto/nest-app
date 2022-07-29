@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, HttpStatus, Param, Patch, Post, UseGuard
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 import { User } from '@models/user.model';
+import { JwtAuthGuard } from '@controllers/auth/jwt-auth.guard';
 import { UsersService } from './users.service';
-import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @ApiTags('Users')
 @UseGuards(JwtAuthGuard)
