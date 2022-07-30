@@ -11,6 +11,7 @@ export const CUSTOM_ICONS: { name: string; path: string }[] = [
   { name: 'linkedin', path: `${CUSTOM_ICON_PATH}/linkedin-in-brands.svg` },
   { name: 'twitter', path: `${CUSTOM_ICON_PATH}/twitter-brands.svg` },
   { name: 'exclamation', path: `${CUSTOM_ICON_PATH}/exclamation-solid.svg` },
+  { name: 'logo', path: `${CUSTOM_ICON_PATH}/logo.svg` },
 ];
 export const SNACKBAR_CONFIG: Partial<GlobalConfig> = {
   closeButton: true,

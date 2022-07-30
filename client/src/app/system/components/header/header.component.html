@@ -1,6 +1,10 @@
-<header class="navbar navbar-inverse navbar-fixed-top opaqued">
-  <div class="container-fluid">
-    <div class="navbar-header">
+<header class="header">
+  <div class="logo-wrapper">
+    <a class="logo" [routerLink]="'/'">
+      <mat-icon class="logo__icon" [svgIcon]="'logo'"></mat-icon>
+      <span class="logo__text">Impact</span>
+    </a>
+    <!-- <div class="navbar-header">
       <mat-icon class="navbar-toggle" (click)="toggleMenu.emit()">menu</mat-icon>
 
       <a class="navbar-brand" [routerLink]="'/'">
@@ -11,8 +15,6 @@
           IMPACT
         </h1>
       </a>
-    </div>
-    <!--    <app-nav></app-nav>-->
-    <app-search></app-search>
+    </div> -->
   </div>
 </header>

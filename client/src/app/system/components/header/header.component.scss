@@ -1,23 +1,27 @@
-// .navbar-header {
-//   width: 100%;
-//   display: flex;
-//   max-height: 60px;
-//   flex-direction: row-reverse;
-//   justify-content: space-between;
-//   align-items: center;
+.header {
+  width: 100%;
+  display: flex;
+  max-height: 60px;
+  justify-content: space-between;
+  align-items: center;
+}
 
-//   @media screen and (min-width: 768px) {
-//     flex-direction: row;
-//     justify-content: flex-start;
-//     width: auto;
-//   }
+.logo {
+  display: flex;
+  align-items: center;
+  color: #a64bf4;
 
-//   h1 {
-//     color: #fff;
-//     font-size: 24px;
-//     text-transform: uppercase;
-//     letter-spacing: 2px;
-//     margin: 0;
-//     font-weight: 700;
-//   }
-// }
+  &-wrapper {
+    display: flex;
+    row-gap: 8px;
+  }
+
+  &__icon {
+    height: 36px;
+    width: 36px;
+  }
+
+  &__text {
+    font-size: 32px;
+  }
+}
