@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { Document, Model } from 'mongoose';
+import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
 import { User } from '@models/user.model';
@@ -34,7 +34,7 @@ export class UsersService {
     return await this.userModel.findByIdAndDelete(id).exec();
   }
 
-  async updateUser(user: User, id: string): Promise<Document<any, any, User> & User & { _id: number }> {
+  async updateUser(user: Partial<User>, id: string): Promise<User> {
     return await this.userModel.findOneAndUpdate({ _id: id }, user, { new: true }).exec();
   }
 

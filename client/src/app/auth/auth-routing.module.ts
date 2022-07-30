@@ -2,7 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthComponent } from './auth.component';
-import { LoginComponent, RegistrationComponent, ResetPasswordComponent } from './components';
+import {
+  LoginComponent,
+  RegistrationComponent,
+  ResetPasswordComponent,
+  SetNewPasswordComponent,
+} from '@auth/components';
 
 const routes: Routes = [
   {
@@ -20,6 +25,10 @@ const routes: Routes = [
       {
         path: 'reset-password',
         component: ResetPasswordComponent,
+      },
+      {
+        path: 'set-new-password',
+        component: SetNewPasswordComponent,
       },
       {
         path: '',

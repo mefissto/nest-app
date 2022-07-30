@@ -11,6 +11,7 @@ import {
   LoginComponent,
   RegistrationComponent,
   ResetPasswordComponent,
+  SetNewPasswordComponent,
 } from '@auth/components';
 
 @NgModule({
@@ -21,6 +22,7 @@ import {
     AuthSubmitButtonComponent,
     AuthSocialIconsComponent,
     ResetPasswordComponent,
+    SetNewPasswordComponent,
   ],
   imports: [CommonModule, AuthRoutingModule, SharedModule],
 })

@@ -5,9 +5,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
+import { AppStoreModule } from '@store/store.module';
 import { CoreModule } from '@core/core.module';
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 import { HeaderInterceptor } from '@core/interceptors/header.interceptor';
 import { ErrorInterceptor } from '@core/interceptors/error.interceptor';
 
@@ -21,6 +22,7 @@ import { ErrorInterceptor } from '@core/interceptors/error.interceptor';
     HttpClientModule,
     CoreModule,
     ToastrModule.forRoot(),
+    AppStoreModule,
   ],
   providers: [
     {

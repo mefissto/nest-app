@@ -1,24 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 
-import { AuthService } from '@core/services';
+import { AuthStoreFacadeService } from '@core/services';
 
 @Component({
   selector: 'app-reset-password',
   templateUrl: './reset-password.component.html',
 })
-export class ResetPasswordComponent implements OnInit, OnDestroy {
+export class ResetPasswordComponent implements OnInit {
   public form: FormGroup;
 
-  private subs: Subscription = new Subscription();
+  public loading$: Observable<boolean> = this.authStoreFacade.loading$;
 
-  constructor(
-    private readonly fb: FormBuilder,
-    private readonly authService: AuthService,
-    private readonly router: Router
-  ) {}
+  constructor(private readonly fb: FormBuilder, private readonly authStoreFacade: AuthStoreFacadeService) {}
 
   get email(): FormControl {
     return this.form.get('email') as FormControl;
@@ -38,19 +33,11 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
     });
   }
 
-  public ngOnDestroy(): void {
-    this.subs.unsubscribe();
-  }
-
   public onSubmit(): void {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
-      this.subs.add(
-        this.authService.resetPassword(this.form.value.email).subscribe(() => {
-          // !TODO --> add logic
-        })
-      );
+      this.authStoreFacade.dispatchResetPassword(this.form.value.email);
     }
   }
 }

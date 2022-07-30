@@ -17,6 +17,7 @@ export class HeaderInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${this.cookieService.getCookie(TOKEN_NAME)}`,
       },
     });
+
     return next.handle(cloneReq);
   }
 }

@@ -32,7 +32,7 @@ export class AuthService {
     }
   }
 
-  public async login(userDTO: User): Promise<{ access_token: string }> {
+  public async login(userDTO: User): Promise<{ access_token: string; user: User }> {
     const user: User = await this.userService.findOne(userDTO.email, true);
 
     if (!user) {
@@ -41,7 +41,7 @@ export class AuthService {
 
     const payload = { username: user.email, sub: user._id };
 
-    return { access_token: this.jwtService.sign(payload, { secret: process.env.JWT_SECRET_KEY }) };
+    return { access_token: this.jwtService.sign(payload, { secret: process.env.JWT_SECRET_KEY }), user };
   }
 
   public async registration(userDTO: User): Promise<void> {
@@ -66,15 +66,30 @@ export class AuthService {
     const user: User = await this.userService.findOne(email);
 
     if (!user) {
-      throw new NotFoundException(`User ${user.email} not found`);
+      throw new NotFoundException(`User ${email} not found`);
     }
 
-    const emailData = new EmailData({
-      email,
-      subject: 'Reset password confirmation',
-      context: { name: user.username },
-    });
+    return Promise.resolve({ id: user._id });
 
-    return this.emailService.sendEmail(emailData);
+    // TODO --> enable it when the emails are ready
+    // const emailData = new EmailData({
+    //   email,
+    //   subject: 'Reset password confirmation',
+    //   context: { name: user.username },
+    // });
+
+    // return this.emailService.sendEmail(emailData);
+  }
+
+  public async setNewPassword(userDto: User): Promise<User> {
+    const user: User = await this.userService.findById(userDto._id);
+
+    if (!user) {
+      throw new NotFoundException(`User not found`);
+    }
+
+    const hash = await this.userService.getHash(userDto.password);
+
+    return this.userService.updateUser({ password: hash }, user._id);
   }
 }

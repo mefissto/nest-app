@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import jwt_decode from 'jwt-decode';
 
 import { ConfigService, CookieService } from '@core/services';
 import { AuthUser } from '@models/auth/auth.model';
-import { Token } from '@models/auth/token.model';
+import { AuthResponse } from '@models/auth/token.model';
 import { TOKEN_NAME } from '@constants';
 
 @Injectable()
@@ -37,16 +37,20 @@ export class AuthService {
     return date;
   }
 
-  public login(userDTO: AuthUser): Observable<Token> {
-    return this.http.post<Token>(`${this.endpoint}/login`, userDTO).pipe(map((token) => this.saveToken(token)));
+  public login(userDTO: AuthUser): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.endpoint}/login`, userDTO).pipe(tap((token) => this.saveToken(token)));
   }
 
   public registration(userDTO: AuthUser): Observable<void> {
     return this.http.post<void>(`${this.endpoint}/registration`, userDTO);
   }
 
-  public resetPassword(email: string): Observable<void> {
-    return this.http.post<void>(`${this.endpoint}/reset-password`, { email });
+  public resetPassword(email: string): Observable<{ id: string }> {
+    return this.http.post<{ id: string }>(`${this.endpoint}/reset-password`, { email });
+  }
+
+  public setNewPassword(user: AuthUser): Observable<void> {
+    return this.http.patch<void>(`${this.endpoint}/set-new-password`, user);
   }
 
   public logout(): void {
@@ -67,14 +71,13 @@ export class AuthService {
     return !(date.valueOf() > new Date().valueOf());
   }
 
-  private saveToken({ access_token }: Token): Token {
+  private saveToken({ access_token }: AuthResponse): void {
     if (access_token) {
       this.cookieService.setCookie(TOKEN_NAME, access_token);
     }
-    return { access_token };
   }
 
-  private getToken(): Token {
+  private getToken(): AuthResponse {
     return { access_token: this.cookieService.getCookie(TOKEN_NAME) };
   }
 }

@@ -8,8 +8,9 @@ import { TooltipRendererDirective } from '@shared/components/tooltip/tooltip.dir
 
 import { InputComponent } from '@shared/components/input/input.component';
 import { TooltipComponent } from '@shared/components/tooltip/tooltip.component';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
 
-const COMPONENTS = [InputComponent];
+const COMPONENTS = [InputComponent, LoaderComponent];
 const DIRECTIVES = [TooltipRendererDirective];
 const MODULES = [FormsModule, ReactiveFormsModule, MaterialModule];
 

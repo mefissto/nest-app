@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Headers, HttpCode, HttpStatus, Patch, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
@@ -24,7 +24,7 @@ export class AuthController {
   @ApiOperation({ summary: 'Log in an user' })
   @ApiResponse({ status: HttpStatus.OK, type: LoginResponse })
   @UseGuards(AuthGuard('loginStrategy'))
-  async login(@Body() user: User) {
+  async login(@Body() user: User): Promise<{ access_token: string; user: User }> {
     return await this.authService.login(user);
   }
 
@@ -40,5 +40,12 @@ export class AuthController {
   @ApiResponse({ status: HttpStatus.OK })
   async resetPassword(@Body('email') email: string) {
     return this.authService.resetPassword(email);
+  }
+
+  @Patch('set-new-password')
+  @ApiOperation({ summary: 'Set new password' })
+  @ApiResponse({ status: HttpStatus.OK })
+  async setNewPassword(@Body() user: User) {
+    return this.authService.setNewPassword(user);
   }
 }
