@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -13,25 +13,25 @@ import { AuthUser } from '@core/models/auth/auth.model';
   templateUrl: './set-new-password.component.html',
 })
 export class SetNewPasswordComponent implements OnInit {
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
   public loading$: Observable<boolean> = this.authStoreFacade.loading$;
 
   private userId: string;
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly route: ActivatedRoute,
     private readonly router: Router,
     private readonly authStoreFacade: AuthStoreFacadeService
   ) {}
 
-  get password(): FormControl {
-    return this.form.get('password') as FormControl;
+  get password(): UntypedFormControl {
+    return this.form.get('password') as UntypedFormControl;
   }
 
-  get confirmPassword(): FormControl {
-    return this.form.get('confirmPassword') as FormControl;
+  get confirmPassword(): UntypedFormControl {
+    return this.form.get('confirmPassword') as UntypedFormControl;
   }
 
   public ngOnInit(): void {

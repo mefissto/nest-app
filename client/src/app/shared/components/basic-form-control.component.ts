@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { ControlValueAccessor, FormControl } from '@angular/forms';
+import { ControlValueAccessor, UntypedFormControl } from '@angular/forms';
 
 @Component({ template: '' })
 export class BasicFormControlComponent implements ControlValueAccessor {
   @Input() public placeholder: string = 'Type something';
   @Input() public label: string;
-  @Input() public control: FormControl;
+  @Input() public control: UntypedFormControl;
 
   public disabled: boolean;
 

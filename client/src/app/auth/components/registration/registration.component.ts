@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormBuilder, Validators, UntypedFormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 
 import { AuthStoreFacadeService } from '@core/services';
@@ -10,22 +10,22 @@ import { AuthUser } from '@core/models/auth/auth.model';
   templateUrl: './registration.component.html',
 })
 export class RegistrationComponent implements OnInit {
-  public form: FormGroup;
+  public form: UntypedFormGroup;
 
   public loading$: Observable<boolean> = this.authStoreFacade.loading$;
 
-  constructor(private readonly fb: FormBuilder, private readonly authStoreFacade: AuthStoreFacadeService) {}
+  constructor(private readonly fb: UntypedFormBuilder, private readonly authStoreFacade: AuthStoreFacadeService) {}
 
-  get email(): FormControl {
-    return this.form.get('email') as FormControl;
+  get email(): UntypedFormControl {
+    return this.form.get('email') as UntypedFormControl;
   }
 
-  get password(): FormControl {
-    return this.form.get('password') as FormControl;
+  get password(): UntypedFormControl {
+    return this.form.get('password') as UntypedFormControl;
   }
 
-  get username(): FormControl {
-    return this.form.get('username') as FormControl;
+  get username(): UntypedFormControl {
+    return this.form.get('username') as UntypedFormControl;
   }
 
   public ngOnInit(): void {
