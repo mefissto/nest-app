@@ -3,14 +3,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-import { AuthEffects } from '@store/effects/auth.effects';
-import { metaReducers, reducers } from './index';
+import { AuthStoreModule } from './auth/auth-store.module';
 
 @NgModule({
   imports: [
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(),
+    EffectsModule.forRoot(),
     StoreDevtoolsModule.instrument(),
-    EffectsModule.forRoot([AuthEffects]),
+    AuthStoreModule,
   ],
   exports: [StoreModule],
 })

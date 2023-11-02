@@ -12,7 +12,7 @@ import { AuthStoreFacadeService } from '@core/services';
 export class LoginComponent implements OnInit {
   public form: UntypedFormGroup;
 
-  public loading$: Observable<boolean> = this.authStoreFacade.loading$;
+  public loading$: Observable<boolean> = this.authStoreFacade.isLoading$;
 
   constructor(private readonly fb: UntypedFormBuilder, private readonly authStoreFacade: AuthStoreFacadeService) {}
 

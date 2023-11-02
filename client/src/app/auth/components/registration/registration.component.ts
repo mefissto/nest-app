@@ -12,7 +12,7 @@ import { AuthUser } from '@core/models/auth/auth.model';
 export class RegistrationComponent implements OnInit {
   public form: UntypedFormGroup;
 
-  public loading$: Observable<boolean> = this.authStoreFacade.loading$;
+  public loading$: Observable<boolean> = this.authStoreFacade.isLoading$;
 
   constructor(private readonly fb: UntypedFormBuilder, private readonly authStoreFacade: AuthStoreFacadeService) {}
 
@@ -40,6 +40,7 @@ export class RegistrationComponent implements OnInit {
     this.form.markAllAsTouched();
 
     if (this.form.valid) {
+      // TODO - remove callback from action arguments
       const cb = (err): void => {
         if (err.status === 403) {
           this.email.setErrors({ exist: { message: err.error.message } });

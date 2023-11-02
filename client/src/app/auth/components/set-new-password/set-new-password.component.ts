@@ -15,7 +15,7 @@ import { AuthUser } from '@core/models/auth/auth.model';
 export class SetNewPasswordComponent implements OnInit {
   public form: UntypedFormGroup;
 
-  public loading$: Observable<boolean> = this.authStoreFacade.loading$;
+  public loading$: Observable<boolean> = this.authStoreFacade.isLoading$;
 
   private userId: string;
 
