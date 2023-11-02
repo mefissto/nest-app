@@ -6,7 +6,9 @@ import { NewsSchema } from "@schemas/news.schema";
 
 const databaseConnection = {
   provide: DBModelsEnum.DATABASE_CONNECTION,
-  useFactory: (): Promise<typeof mongoose> => mongoose.connect(process.env.DB_CONNECTION_STRING),
+  // TODO - add to env variables
+  useFactory: (): Promise<typeof mongoose> => mongoose.set('strictQuery', true).connect('mongodb+srv://Mefissto:mefissto7526@nest.lrhy3.mongodb.net/'),
+  // useFactory: (): Promise<typeof mongoose> => mongoose.connect(process.env.DB_CONNECTION_STRING),
 }
 
 export const usersProvider =

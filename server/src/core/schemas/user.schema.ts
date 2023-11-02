@@ -15,7 +15,7 @@ export const UserSchema = new mongoose.Schema(
 
 // Duplicate the ID field.
 UserSchema.virtual('id').get(function () {
-  return this._id.toHexString();
+  return this._id.prototype.toHexString();
 });
 
 // Ensure virtual fields are serialized.
