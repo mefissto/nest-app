@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 import { ConfigService, CookieService } from '@core/services';
 import { AuthUser } from '@models/auth/auth.model';
@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   private static getTokenExpirationDate(token: string): Date {
-    const decoded: { [key: string]: unknown } = jwt_decode(token);
+    const decoded: { [key: string]: unknown } = jwtDecode(token);
 
     if (decoded.exp === undefined) {
       return null;
