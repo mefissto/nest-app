@@ -3,7 +3,7 @@ import { UserRolesEnum } from '../enums/user-roles.enum';
 
 export const UserSchema = new mongoose.Schema(
   {
-    _id: { type: mongoose.Types.ObjectId, required: true },
+    // _id: { type: mongoose.Types.ObjectId, required: true },
     username: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
@@ -15,7 +15,7 @@ export const UserSchema = new mongoose.Schema(
 
 // Duplicate the ID field.
 UserSchema.virtual('id').get(function () {
-  return this._id.prototype.toHexString();
+  return this._id.toHexString();
 });
 
 // Ensure virtual fields are serialized.
